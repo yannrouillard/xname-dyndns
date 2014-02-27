@@ -64,8 +64,8 @@ def get_resolved_ip(server, nameservers_domain='xname.org'):
             ip = [x.to_text() for x in answer]
             break
 
-        except dns.resolver.NoAnswer:
-            # NoAnswer means that the name has not yet been
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+            # NoAnswer or NXDOMAIN means that the name has not yet been
             # registered on xname.org
             break
         except NameError as e:
